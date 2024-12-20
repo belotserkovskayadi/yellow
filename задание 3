@@ -1,0 +1,18 @@
+class Solution(object):
+    def merge(self, intervals):
+        if not intervals:
+            return []
+
+        intervals.sort()  # Sort intervals by start time
+
+        merged = [intervals[0]]
+        for i in range(1, len(intervals)):
+            current_interval = intervals[i]
+            previous_interval = merged[-1]
+
+            if current_interval[0] <= previous_interval[1]:  # Overlap
+                merged[-1][1] = max(previous_interval[1], current_interval[1])
+            else:
+                merged.append(current_interval)
+
+        return merged
