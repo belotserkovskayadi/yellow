@@ -1,0 +1,21 @@
+class Solution:
+    def getIntersectionNode(self, headA, headB):
+        lenA = self._len(headA)
+        lenB = self._len(headB)
+        while lenA > lenB:
+            headA = headA.next
+            lenA -= 1
+        while lenB > lenA:
+            headB = headB.next
+            lenB -= 1
+        while headA != headB:
+            headA, headB = headA.next, headB.next
+        return headA
+
+    def _len(self, head):
+        return len(list(self._iter(head)))
+
+    def _iter(self, head):
+        while head:
+            yield head
+            head = head.next
